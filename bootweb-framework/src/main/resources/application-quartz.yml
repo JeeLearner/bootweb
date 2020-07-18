@@ -1,0 +1,36 @@
+spring:
+  quartz:
+    job-store-type: jdbc
+    # 调度器名称
+    scheduler-name: BWScheduler
+    # 延时启动
+    startup-delay: 1
+    # 启动时更新己存在的Job，这样就不用每次修改targetObject后删除qrtz_job_details表对应记录了
+    overwrite-existing-jobs: true
+    # 设置自动启动，默认为true
+    auto-startup: true
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: BWScheduler #调度器实例名称
+            instanceId: AUTO #调度器实例编号自动生成
+          jobStore:
+            class: org.quartz.impl.jdbcjobstore.JobStoreTX #持久化方式配置
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate #持久化方式配置数据驱动，MySQL数据库
+            tablePrefix: qrtz_ #quartz相关数据表前缀名
+            # 集群配置
+            isClustered: true #开启分布式部署
+            clusterCheckinInterval: 15000 #分布式节点有效性检查时间间隔，单位：毫秒
+            # JobStore处理失败trigger的最大等待时间
+            maxMisfiresToHandleAtATime: 1
+            # 默认为false。如果值为true，就是告诉Quartz（当使用JobStoreTX或CMT)调用JDBC连接的setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE)方法。这可以防止在高负载、持久事务时锁定超时。
+            txIsolationLevelSerializable: true
+            useProperties: false #配置是否使用
+          threadPool:
+            class: org.quartz.simpl.SimpleThreadPool #线程池实现类
+            threadCount: 20 #执行最大并发线程数量
+            threadPriority: 5 #线程优先级
+            threadsInheritContextClassLoaderOfInitializingThread: true #配置是否启动自动加载数据库内的定时任务，默认true
+
+

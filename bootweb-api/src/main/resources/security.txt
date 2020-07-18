@@ -1,0 +1,204 @@
+UserDetailsServiceAutoConfiguration 和用户相关的自动化配置类
+
+    //获取密码
+    private String getOrDeducePassword(User user, PasswordEncoder encoder) {
+        String password = user.getPassword();
+        if (user.isPasswordGenerated()) {
+            logger.info(String.format("%n%nUsing generated security password: %s%n", user.getPassword()));
+        }
+
+        return encoder == null && !PASSWORD_ALGORITHM_PATTERN.matcher(password).matches() ? "{noop}" + password : password;
+    }
+
+SecurityProperties.java
+    public void setPassword(String password) {
+        if (StringUtils.hasLength(password)) {
+            this.passwordGenerated = false;
+            this.password = password;
+        }
+    }
+
+PasswordEncoder -> BCryptPasswordEncoder(官方推荐)
+
+FormLoginConfigurer -> AbstractAuthenticationFilterConfigurer 初始化
+    protected AbstractAuthenticationFilterConfigurer() {
+        this.defaultSuccessHandler = new SavedRequestAwareAuthenticationSuccessHandler();
+        this.successHandler = this.defaultSuccessHandler;
+        this.setLoginPage("/login");
+    }
+
+登录：
+    UsernamePasswordAuthenticationToken
+    UsernamePasswordAuthenticationFilter
+        public UsernamePasswordAuthenticationFilter() {
+            super(new AntPathRequestMatcher("/login", "POST"));
+        }
+        protected String obtainPassword(HttpServletRequest request) {
+            return request.getParameter(this.passwordParameter);
+        }
+        protected String obtainUsername(HttpServletRequest request) {
+            return request.getParameter(this.usernameParameter);
+        }
+        public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+            //获取用户名密码
+            String username = this.obtainUsername(request);
+            String password = this.obtainPassword(request);
+            //构建UsernamePasswordAuthenticationToken
+            UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(username, password);
+            //设置details对象，details里边放的是 WebAuthenticationDetails 实例，该实例主要描述了两个信息，请求的 remoteAddress 以及请求的 sessionId。
+            this.setDetails(request, authRequest);
+            //authenticate校验
+            return this.getAuthenticationManager().authenticate(authRequest);
+        }
+        protected void setDetails(HttpServletRequest request, UsernamePasswordAuthenticationToken authRequest) {
+            authRequest.setDetails(this.authenticationDetailsSource.buildDetails(request));
+        }
+    ProviderManager
+        //几乎关于认证的重要逻辑都将在这里完成
+        public Authentication authenticate(Authentication authentication)
+                throws AuthenticationException {
+            Class<? extends Authentication> toTest = authentication.getClass();
+            for (AuthenticationProvider provider : getProviders()) {
+                //判断当前 provider 是否支持该 authentication
+                if (!provider.supports(toTest)) {
+                    continue;
+                }
+                //如果支持，则调用 provider 的 authenticate 方法开始做校验，校验完成后，会返回一个新的 Authenticatio
+                result = provider.authenticate(authentication);
+                if (result != null) {
+                    //把旧的 Token 的 details 属性拷贝到新的 Token 中来。
+                    copyDetails(authentication, result);
+                    break;
+                }
+            }
+            //如果 provider 的 authenticate 方法没能正常返回一个 Authentication，则调用 provider 的 parent 的 authenticate 方法继续校验
+            if (result == null && parent != null) {
+                result = parentResult = parent.authenticate(authentication);
+            }
+            if (result != null) {
+                //eraseCredentialsAfterAuthentication方法擦除凭证信息，也就是你的密码，这个擦除方法比较简单，就是将 Token 中的 credentials 属性置空。
+                if (eraseCredentialsAfterAuthentication
+                        && (result instanceof CredentialsContainer)) {
+                    ((CredentialsContainer) result).eraseCredentials();
+                }
+                if (parentResult == null) {
+                    //通过 publishAuthenticationSuccess 方法将登录成功的事件广播出去
+                    eventPublisher.publishAuthenticationSuccess(result);
+                }
+                return result;
+            }
+            throw lastException;
+        }
+    AbstractUserDetailsAuthenticationProvider
+        public Authentication authenticate(Authentication authentication)
+        		throws AuthenticationException {
+        	//获取用户名
+        	String username = (authentication.getPrincipal() == null) ? "NONE_PROVIDED"
+        			: authentication.getName();
+        	//retrieveUser:获取当前用户对象，这一步会调用我们自己在登录时候的写的 loadUserByUsername 方法，所以这里返回的 user 其实就是你的登录对象
+        	try {
+                user = this.retrieveUser(username, (UsernamePasswordAuthenticationToken)authentication);
+            } catch (UsernameNotFoundException e) {
+                this.logger.debug("User '" + username + "' not found");
+                //默认情况下，hideUserNotFoundExceptions 的值就为 true。
+                //报错类型转换==>安全
+                if (this.hideUserNotFoundExceptions) {
+                    throw new BadCredentialsException(this.messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Bad credentials"));
+                }
+                throw e;
+                }
+        	//检验 user 中的各个账户状态属性是否正常，例如账户是否被禁用、账户是否被锁定、账户是否过期等等。
+        	preAuthenticationChecks.check(user);
+        	//做密码比对
+        	additionalAuthenticationChecks(user,(UsernamePasswordAuthenticationToken) authentication);
+        	//检查密码是否过期
+        	postAuthenticationChecks.check(user);
+        	Object principalToReturn = user;
+        	//forcePrincipalAsString 属性，这个是是否强制将 Authentication 中的 principal 属性设置为字符串，
+        	//这个属性我们一开始在 UsernamePasswordAuthenticationFilter 类中其实就是设置为字符串的（即 username），
+        	//但是默认情况下，当用户登录成功之后， 这个属性的值就变成当前用户这个对象了。
+        	//之所以会这样，就是因为 forcePrincipalAsString 默认为 false，不过这块其实不用改，就用 false，这样在后期获取当前用户信息的时候反而方便很多。
+        	if (forcePrincipalAsString) {
+        		principalToReturn = user.getUsername();
+        	}
+        	// createSuccessAuthentication 方法构建一个新的 UsernamePasswordAuthenticationToken
+        	return createSuccessAuthentication(principalToReturn, authentication, user);
+        }
+
+用户信息保存
+    要去找登录的用户信息，我们得先来解决一个问题，就是上面我们说了这么多，这一切是从哪里开始被触发的？
+    UsernamePasswordAuthenticationFilter 的父类 AbstractAuthenticationProcessingFilter，这个类我们经常会见到，因为很多时候当我们想要在 Spring Security 自定义一个登录验证码或者将登录参数改为 JSON 的时候，
+    我们都需自定义过滤器继承自 AbstractAuthenticationProcessingFilter ，
+    毫无疑问，UsernamePasswordAuthenticationFilter#attemptAuthentication 方法就是在 AbstractAuthenticationProcessingFilter 类的 doFilter 方法中被触发的
+    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
+    		throws IOException, ServletException {
+    	HttpServletRequest request = (HttpServletRequest) req;
+    	HttpServletResponse response = (HttpServletResponse) res;
+    	Authentication authResult;
+    	try {
+    	    //当 attemptAuthentication 方法被调用时，实际上就是触发了 UsernamePasswordAuthenticationFilter#attemptAuthentication 方法
+    		authResult = attemptAuthentication(request, response);
+    		if (authResult == null) {
+    			return;
+    		}
+    		sessionStrategy.onAuthentication(authResult, request, response);
+    	}
+    	catch (InternalAuthenticationServiceException failed) {
+    	    //unsuccessfulAuthentication
+    		unsuccessfulAuthentication(request, response, failed);
+    		return;
+    	}
+    	catch (AuthenticationException failed) {
+    		unsuccessfulAuthentication(request, response, failed);
+    		return;
+    	}
+    	if (continueChainBeforeSuccessfulAuthentication) {
+    		chain.doFilter(request, response);
+    	}
+    	//登录成功被调用
+    	successfulAuthentication(request, response, chain, authResult);
+    }
+
+    protected void successfulAuthentication(HttpServletRequest request,
+            HttpServletResponse response, FilterChain chain, Authentication authResult)
+            throws IOException, ServletException {
+        //登录成功的用户信息被保存在这里，也就是说，在任何地方，如果我们想获取用户登录信息，都可以从 SecurityContextHolder.getContext() 中获取到，想修改，也可以在这里修改。
+        SecurityContextHolder.getContext().setAuthentication(authResult);
+        rememberMeServices.loginSuccess(request, response, authResult);
+        // Fire event
+        if (this.eventPublisher != null) {
+            eventPublisher.publishEvent(new InteractiveAuthenticationSuccessEvent(
+                    authResult, this.getClass()));
+        }
+        // successHandler.onAuthenticationSuccess，这就是我们在 SecurityConfig 中配置登录成功回调方法，就是在这里被触发的
+        successHandler.onAuthenticationSuccess(request, response, authResult);
+    }
+未认证的处理：
+    没有认证就访问数据，直接重定向到登录页面就行了，这没错，系统默认的行为也是这样。
+    但是在前后端分离中，这个逻辑明显是有问题的，如果用户没有登录就访问一个需要认证后才能访问的页面，这个时候，我们不应该让用户重定向到登录页面，而是给用户一个尚未登录的提示，前端收到提示之后，再自行决定页面跳转。
+    要解决这个问题，就涉及到 Spring Security 中的一个接口 AuthenticationEntryPoint ，该接口有一个实现类：LoginUrlAuthenticationEntryPoint ，该类中有一个方法 commence，如下：
+    public void commence(HttpServletRequest request, HttpServletResponse response,
+    		AuthenticationException authException) {
+    	String redirectUrl = null;
+    	if (useForward) {
+    		if (forceHttps && "http".equals(request.getScheme())) {
+    			redirectUrl = buildHttpsRedirectUrlForRequest(request);
+    		}
+    		if (redirectUrl == null) {
+    			String loginForm = determineUrlToUseForThisRequest(request, response,
+    					authException);
+    			if (logger.isDebugEnabled()) {
+    				logger.debug("Server side forward to: " + loginForm);
+    			}
+    			RequestDispatcher dispatcher = request.getRequestDispatcher(loginForm);
+    			dispatcher.forward(request, response);
+    			return;
+    		}
+    	}
+    	else {
+    		redirectUrl = buildRedirectUrlToLoginPage(request, response, authException);
+    	}
+    	redirectStrategy.sendRedirect(request, response, redirectUrl);
+    }
+    首先我们从这个方法的注释中就可以看出，这个方法是用来决定到底是要重定向还是要 forward，通过 Debug 追踪，我们发现默认情况下 useForward 的值为 false，所以请求走进了重定向。
+    那么我们解决问题的思路很简单，直接重写这个方法，在方法中返回 JSON 即可，不再做重定向操作

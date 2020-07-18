@@ -1,0 +1,47 @@
+package ${package}.domain;
+
+import com.jee.boot.common.core.domain.BaseEntity;
+import java.io.Serializable;
+
+#foreach ($column in $columns)
+    #if($column.attrType == 'LocalDateTime' && ($column.attrname != 'createBy' && $column.attrname != 'createTime' && $column.attrname != 'updateBy' && $column.attrname != 'updateTime' && $column.attrname != 'remark'))
+    import java.time.LocalDateTime;
+        #break
+    #end
+#end
+#foreach ($column in $columns)
+    #if($column.attrType == 'BigDecimal')
+    import java.math.BigDecimal;
+        #break
+    #end
+#end
+
+/**
+ * ${tableComment} VO对象 ${tableName}
+ *
+ * @author ${author}
+ * @version V1.0
+ */
+public class ${classNameWithPre}VO extends BaseEntity implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+#foreach ($column in $columns)
+#if($column.attrname != 'createBy' && $column.attrname != 'createTime' && $column.attrname != 'updateBy' && $column.attrname != 'updateTime' && $column.attrname != 'remark')
+    /** $column.columnComment */
+    private $column.attrType $column.attrname;
+#end
+#end
+
+
+#foreach ($column in $columns)
+#if($column.attrname != 'createBy' && $column.attrname != 'createTime' && $column.attrname != 'updateBy' && $column.attrname != 'updateTime' && $column.attrname != 'remark')
+    public void set${column.attrName}($column.attrType $column.attrname){
+        this.$column.attrname = $column.attrname;
+    }
+
+    public $column.attrType get${column.attrName}(){
+        return $column.attrname;
+    }
+#end
+#end
+}

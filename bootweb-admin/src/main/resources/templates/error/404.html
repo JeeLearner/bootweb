@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <!--移动端
+      content属性值 :
+         width:可视区域的宽度，值可为数字或关键词device-width
+         height:同width
+         intial-scale:页面首次被显示是可视区域的缩放级别，取值1.0则页面按实际尺寸显示，无任何缩放
+         maximum-scale=1.0, minimum-scale=1.0;可视区域的缩放级别，
+         maximum-scale用户可将页面放大的程序，1.0将禁止用户放大到实际尺寸之上。
+         user-scalable:是否可对页面进行缩放，no 禁止缩放
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BW-404</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/animate.css" rel="stylesheet"/>
+    <link href="/css/style.css" rel="stylesheet"/>
+</head>
+<body class="gray-bg">
+<div class="middle-box text-center animated fadeInDown">
+    <h1>404</h1>
+    <h3 class="font-bold">找不到网页！</h3>
+    <!--error-desc没有定义-->
+    <div class="error-desc">
+        <p>对不起，您正在寻找的页面不存在。尝试检查URL的错误，然后按浏览器上的刷新按钮或尝试在我们的应用程序中找到其他内容。</p>
+        <!--<a href="javascript:top.document.location.href='/'" class="btn btn-primary" >主页</a>-->
+        <a href="javascript:index()" class="btn btn-primary m-t">主页</a>
+    </div>
+</div>
+<script type="text/javascript">
+    function index() {
+        window.parent.frames.location.href = ctx + "index";
+    }
+</script>
+</body>
+</html>

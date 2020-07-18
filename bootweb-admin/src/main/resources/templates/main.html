@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页</title>
+    <meta name="description" content="首页">
+    <!-- 360浏览器急速模式 -->
+    <meta name="renderer" content="webkit">
+    <!-- 避免IE使用兼容模式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="/css/main/animate.min.css" rel="stylesheet"/>
+    <link href="/css/main/style.min862f.css" rel="stylesheet"/>
+</head>
+<style>
+    .ws-top-ul {
+        width: 400px;
+        height: 450px;
+        padding: 0px;
+        overflow: auto;
+    }
+    .ws-top-ul li {
+        list-style: none;
+        text-align: left;
+        height: 15px;
+        padding-left: 8px;
+        padding-right: 8px;
+        margin-bottom: 5px;
+    }
+</style>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-sm-8">
+                <div id="map" style="width: 600px; height: 450px"></div>
+            </div>
+            <div class="col-sm-4">
+                <div id="ws" class="ws-top">
+                    <ul id="ws-top-ul" class="ws-top-ul">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div id="visit" style="width: 600px; height: 400px"></div>
+            </div>
+        </div>
+    </div>
+</body>
+<th:block th:include="include :: echarts-js" />
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/ajax/libs/layer/layer.min.js"></script>
+<script th:inline="javascript">var ctx = [[@{/}]];</script>
+<script src="/bw/main/main.js" ></script>
+<script type="text/javascript">
+    var socket = null;
+    if ('WebSocket' in window){
+        socket = new WebSocket("ws://localhost:80/ws/1")
+    } else {
+        alert('当前浏览器 Not support websocket')
+    }
+
+    //获得消息事件
+    socket.onmessage = function(msg) {
+        var serverMsg = "websocket msg：" + msg.data;
+        console.log(serverMsg);
+        //发现消息进入    开始处理前端触发逻辑
+        if (msg.data != '连接成功'){
+            var ul = document.getElementById("ws-top-ul");
+            //以下消息可接收多条，循环...
+            var li = document.createElement("li");
+            var liMsg = '<li>' + msg.data + '</li>';
+            li.innerHTML = liMsg;
+            ul.insertBefore(li, ul.firstChild);
+        }
+    };
+
+    //连接成功建立的回调方法
+    socket.onopen = function () {
+        console.info("websocket connection success")
+    }
+    //关闭事件
+    socket.onclose = function() {
+        console.log("websocket connection closed");
+    };
+    //发生了错误事件
+    socket.onerror = function() {
+        console.log("websocket connection error");
+    }
+</script>
+</html>

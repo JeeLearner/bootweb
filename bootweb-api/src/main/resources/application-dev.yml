@@ -1,0 +1,112 @@
+#bootweb配置
+bootweb:
+  # 名称
+  name: bootweb
+  # 版本
+  version: 1.0.0
+  # 版权年份
+  copyright-year: 2020
+  # 实例演示开关
+  demo-enabled: true
+  # 文件上传路径 示例（ Windows配置D:/bw/uploadPath，Linux配置 /home/bw/uploadPath）
+  profile: D:/bw/
+  # 获取ip地址开关
+  address-enabled: true
+  # 头像上传路径
+  avatar-path: ${bootweb.profile}/avatar/
+  # 下载路径
+  download-path: ${bootweb.profile}/download/
+  # 上传路径
+  upload-path: ${bootweb.profile}/upload/
+
+
+
+
+# Tomcat
+server:
+  port: 80
+  connection-timeout: 5000ms
+  servlet:
+    context-path: /
+  tomcat:
+    # tomcat的URI编码
+    uri-encoding: UTF-8
+    # tomcat最大线程数，默认为200
+    max-threads: 800
+    # Tomcat启动初始化的线程数，默认值25
+    min-spare-threads: 30
+    max-connections: 0
+    max-http-header-size: 0
+    max-http-post-size: 0
+
+spring:
+  profiles:
+    active: dev
+    include: druid,sys,shiro
+  # 模板引擎
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    encoding: utf-8
+    # 禁用缓存
+    cache: false
+    servlet:
+      content-type: text/html
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  # 资源信息
+  messages:
+    # 国际化资源文件路径
+    basename: i18n/messages
+    encoding: utf-8
+    cache-duration: 120
+  servlet:
+    multipart:
+      # 单个文件大小
+      max-file-size:  10MB
+      # 设置总上传的文件大小
+      max-request-size:  20MB
+  # 服务模块
+  devtools:
+    restart:
+      # 热部署开关
+      enabled: true
+
+
+# 日志配置
+logging:
+  level:
+    com.jee: debug
+    org.springframework: warn
+# 用户配置
+user:
+  password:
+    # 密码错误{maxRetryCount}次锁定10分钟
+    maxRetryCount: 5
+
+mybatis:
+  # 搜索指定包别名
+  type-aliases-package: com.jee.boot.**.domain,com.jee.boot.**.dto
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapper-locations: classpath:mapper/**/*Mapper.xml
+  # 加载全局的配置文件
+  configLocation: classpath:mybatis/mybatis-config.xml
+
+
+# PageHelper分页插件
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+# 防止XSS攻击
+xss:
+  # 过滤开关
+  enabled: true
+  # 排除链接（多个用逗号分隔）
+  excludes: /system/notice/*
+  # 匹配链接
+  urlPatterns: /system/*,/monitor/*,/tool/*

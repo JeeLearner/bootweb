@@ -1,0 +1,6 @@
+#sys
+sys:
+  # 验证码开关
+  verify-code-enabled: false
+  # 验证码类型 math 数组计算 char 字符
+  verify-code-type: math

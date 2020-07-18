@@ -1,0 +1,151 @@
+package com.jee.boot.springsecurity.config;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import java.io.PrintWriter;
+
+/**
+ * Spring Security配置
+ *
+ * @author jeeLearner
+ * @version V1.0
+ */
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return NoOpPasswordEncoder.getInstance();
+    }
+
+    /**
+     * Spring Security 支持多种不同的数据源，这些不同的数据源最终都将被封装成 UserDetailsService 的实例，\
+     * 一般自己来创建一个类实现 UserDetailsService 接口，除了自己封装，我们也可以使用系统默认提供的 UserDetailsService 实例，
+     *  UserDetailsManager  -> InMemoryUserDetailsManager
+     *  CachingUserDetailsService
+     *  UserDetailsServiceDelegator
+     *  JdbcDaoImpl  -> JdbcUserDetailsManager 这里有判断的SQL
+     *  。
+     * @return
+     */
+    @Override
+    @Bean
+    protected UserDetailsService userDetailsService(){
+        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+        manager.createUser(User.withUsername("admin").password("admin").roles("admin").build());
+        manager.createUser(User.withUsername("jee").password("jee").roles("user").build());
+        return manager;
+    }
+
+    /**
+     * 角色继承
+     *   注意，在配置时，需要给角色手动加上 ROLE_ 前缀。上面的配置表示 ROLE_admin 自动具备 ROLE_user 的权限
+     * @return
+     */
+    @Bean
+    RoleHierarchy roleHierarchy(){
+        RoleHierarchyImpl hierarchy = new RoleHierarchyImpl();
+        hierarchy.setHierarchy("ROLE_admin > ROLE_user");
+        return hierarchy;
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication()
+                .withUser("admin")
+                .password("admin")
+                .roles("admin")
+            .and()
+                .withUser("jee")
+                .password("jee")
+                .roles("user");
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/js/**", "/css/**","/images/**");
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                //通配符
+                // **	匹配多层路径
+                //*	匹配一层路径
+                //?	匹配任意单个字符
+                //注意：拦截规则的顺序不能写错
+                //在拦截规则的配置类 AbstractRequestMatcherRegistry 中，可以看到，在任何拦截规则之前（包括 anyRequest 自身），
+                // 都会先判断 anyRequest 是否已经配置，如果已经配置，则会抛出异常，系统启动失败。
+                //这样大家就理解了为什么 anyRequest 一定要放在最后。
+                .antMatchers("/admin/**").hasRole("admin")
+                .antMatchers("/user/**").hasRole("user")
+                .anyRequest().authenticated()
+                .and()
+                    .formLogin()
+                    .loginPage("/login.html")
+                    .loginProcessingUrl("/login")
+                    .usernameParameter("username")
+                    .passwordParameter("password")
+                    //.defaultSuccessUrl("/index")  //地址栏输入什么，登录后跳转到什么页面
+                    //.successForwardUrl("/index")  //不管地址栏输入什么，跳转到index，等价于：defaultSuccessUrl("/index", true)
+                    //.failureForwardUrl("/error") //服务端跳转
+                    //.failureUrl("/error.html") //重定向
+                    //json交互，替换上面四个
+                    .successHandler((req, resp, authentication) -> {
+                        Object principal = authentication.getPrincipal();
+                        resp.setContentType("application/json;charset=utf-8");
+                        PrintWriter out = resp.getWriter();
+                        out.write(new ObjectMapper().writeValueAsString(principal));
+                        out.flush();
+                        out.close();
+                    })
+                    .failureHandler((req, resp, e) -> {
+                        resp.setContentType("application/json;charset=utf-8");
+                        PrintWriter out = resp.getWriter();
+                        out.write(e.getMessage());
+                        out.flush();
+                        out.close();
+                    })
+                    .permitAll()
+                .and()
+                    .logout()
+                    //.logoutUrl("/logout")
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
+                    //.logoutSuccessUrl("/index")
+                    .logoutSuccessHandler((req, resp, authException) -> {
+                        resp.setContentType("application/json;charset=utf-8");
+                        PrintWriter out = resp.getWriter();
+                        out.write("注销成功");
+                        out.flush();
+                        out.close();
+                    })
+                    //.deleteCookies()
+                    //.clearAuthentication(true) //清除认证信息，默认不用配置
+                    //.invalidateHttpSession(true) //使 HttpSession 失效，默认不用配置
+                    .permitAll()
+                .and()
+                    .csrf().disable()
+                .exceptionHandling()
+                    .authenticationEntryPoint((req, resp, authException) -> {
+                        resp.setContentType("application/json;charset=utf-8");
+                        PrintWriter out = resp.getWriter();
+                        out.write("尚未登录，请先登录");
+                        out.flush();
+                        out.close();
+                    });
+    }
+}
+

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+	<th:block th:include="include :: header('操作日志记录列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+		<div class="row">
+			<div class="col-sm-12 search-collapse">
+				<form id="formId">
+					<div class="select-list">
+						<ul>
+							<li>
+								模块标题：<input type="text" name="title"/>
+							</li>
+
+							<li>
+								业务类型（0其它 1新增 2修改 3删除）：<input type="text" name="businessType"/>
+							</li>
+
+							<li>
+								方法名称：<input type="text" name="method"/>
+							</li>
+
+							<li>
+								请求方式：<input type="text" name="requestMethod"/>
+							</li>
+
+							<li>
+								操作类别（0其它 1后台用户 2手机端用户）：<input type="text" name="operatorType"/>
+							</li>
+
+							<li>
+								操作人员：<input type="text" name="operName"/>
+							</li>
+
+							<li>
+								部门名称：<input type="text" name="deptName"/>
+							</li>
+
+							<li>
+								请求URL：<input type="text" name="operUrl"/>
+							</li>
+
+							<li>
+								主机地址：<input type="text" name="operIp"/>
+							</li>
+
+							<li>
+								操作地点：<input type="text" name="operLocation"/>
+							</li>
+
+							<li>
+								请求参数：<input type="text" name="operParam"/>
+							</li>
+
+							<li>
+								返回参数：<input type="text" name="jsonResult"/>
+							</li>
+
+							<li>
+								操作状态（0正常 1异常）：<input type="text" name="status"/>
+							</li>
+
+							<li>
+								错误消息：<input type="text" name="errorMsg"/>
+							</li>
+
+							<li>
+								操作时间：<input type="text" name="operTime"/>
+							</li>
+
+							<li>
+								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+							</li>
+						</ul>
+					</div>
+				</form>
+			</div>
+			
+	        <div class="btn-group-sm" id="toolbar" role="group">
+				<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:operLog:add">
+					<i class="fa fa-plus"></i> 添加
+				</a>
+				<a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="system:operLog:edit">
+					<i class="fa fa-edit"></i> 修改
+				</a>
+				<a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:operLog:remove">
+					<i class="fa fa-remove"></i> 删除
+				</a>
+				<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:operLog:export">
+						<i class="fa fa-download"></i> 导出
+				 </a>
+			</div>
+			<div class="col-sm-12 select-table table-striped">
+				<table id="bootstrap-table" data-mobile-responsive="true"></table>
+			</div>
+		</div>
+	</div>
+    <div th:include="include :: footer"></div>
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('system:operLog:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('system:operLog:remove')}]];
+        var prefix = ctx + "system/operLog";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+				exportUrl: prefix + "/export",
+                modalName: "操作日志记录",
+		        showExport: true,
+                columns: [{
+		            checkbox: true
+		        },
+				{
+					field : 'operId', 
+					title : '日志主键',
+					visible: false
+				},
+				{
+					field : 'title', 
+					title : '模块标题',
+					sortable: true
+				},
+				{
+					field : 'businessType', 
+					title : '业务类型（0其它 1新增 2修改 3删除）',
+					sortable: true
+				},
+				{
+					field : 'method', 
+					title : '方法名称',
+					sortable: true
+				},
+				{
+					field : 'requestMethod', 
+					title : '请求方式',
+					sortable: true
+				},
+				{
+					field : 'operatorType', 
+					title : '操作类别（0其它 1后台用户 2手机端用户）',
+					sortable: true
+				},
+				{
+					field : 'operName', 
+					title : '操作人员',
+					sortable: true
+				},
+				{
+					field : 'deptName', 
+					title : '部门名称',
+					sortable: true
+				},
+				{
+					field : 'operUrl', 
+					title : '请求URL',
+					sortable: true
+				},
+				{
+					field : 'operIp', 
+					title : '主机地址',
+					sortable: true
+				},
+				{
+					field : 'operLocation', 
+					title : '操作地点',
+					sortable: true
+				},
+				{
+					field : 'operParam', 
+					title : '请求参数',
+					sortable: true
+				},
+				{
+					field : 'jsonResult', 
+					title : '返回参数',
+					sortable: true
+				},
+				{
+					field : 'status', 
+					title : '操作状态（0正常 1异常）',
+					sortable: true
+				},
+				{
+					field : 'errorMsg', 
+					title : '错误消息',
+					sortable: true
+				},
+				{
+					field : 'operTime', 
+					title : '操作时间',
+					sortable: true
+				},
+		        {
+		            title: '操作',
+		            align: 'center',
+		            formatter: function(value, row, index) {
+		            	var actions = [];
+		            	actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.operId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.operId + '\')"><i class="fa fa-remove"></i>删除</a>');
+						return actions.join('');
+		            }
+		        }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

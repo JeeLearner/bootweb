@@ -1,0 +1,111 @@
+package ${basePackage}.admin.controller.${moduleName};
+
+import java.util.List;
+import ${basePackage}.common.core.web.BaseController;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import ${basePackage}.common.annotation.Log;
+import ${basePackage}.common.utils.text.Convert;
+import ${basePackage}.common.enums.BusinessType;
+import ${basePackage}.common.core.page.PageUtil;
+import ${basePackage}.common.core.result.R;
+import ${basePackage}.common.utils.bean.JeeBeanUtils;
+import ${basePackage}.common.utils.spring.ServletUtils;
+import ${package}.dto.${classNameWithPre}DTO;
+import ${package}.vo.${classNameWithPre}VO;
+import ${package}.service.I${classNameWithPre}Service;
+import ${basePackage}.shiro.utils.ShiroUtils;
+
+/**
+ * ${tableComment} 控制层
+ * 
+ * @author ${author}
+ * @version V1.0
+ */
+@Controller
+@RequestMapping("/${moduleName}/${classname}")
+public class ${classNameWithPre}Controller extends BaseController {
+    private String prefix = "${moduleName}/${classname}";
+	
+	@Autowired
+	private I${classNameWithPre}Service ${classname}Service;
+	
+	@RequiresPermissions("${moduleName}:${classname}:view")
+	@GetMapping()
+	public String ${classname}() {
+	    return prefix + "/${classname}";
+	}
+	
+	/**
+	 * 查询${tableComment}列表
+	 */
+	@RequiresPermissions("${moduleName}:${classname}:list")
+	@PostMapping("/list")
+	@ResponseBody
+	public R list(${classNameWithPre}DTO dto) {
+		return PageUtil.page(ServletUtils.getRequest(), () -> {
+			List<${classNameWithPre}DTO> dtoList = ${classname}Service.list${className}(dto);
+			return JeeBeanUtils.mapList(dtoList, ${classNameWithPre}DTO.class, ${classNameWithPre}VO.class);
+		});
+	}
+	
+	/**
+	 * 新增${tableComment}
+	 */
+	@GetMapping("/add")
+	public String add() {
+	    return prefix + "/add";
+	}
+	
+	/**
+	 * 新增保存${tableComment}
+	 */
+	@RequiresPermissions("${moduleName}:${classname}:add")
+	@Log(title = "${tableComment}", businessType = BusinessType.INSERT)
+	@PostMapping("/add")
+	@ResponseBody
+	public R addSave(@Validated ${classNameWithPre}DTO dto) {
+		dto.setCreateBy(ShiroUtils.getLoginName());
+		int row = ${classname}Service.insert${className}(dto);
+		return res(row);
+	}
+
+	/**
+	 * 修改${tableComment}
+	 */
+	@GetMapping("/edit/{${primaryKey.attrname}}")
+	public String edit(@PathVariable("${primaryKey.attrname}") ${primaryKey.attrType} ${primaryKey.attrname}, ModelMap mmap) {
+		${classNameWithPre}DTO ${classname} = ${classname}Service.get${className}ById(${primaryKey.attrname});
+		mmap.put("${classname}", ${classname});
+	    return prefix + "/edit";
+	}
+	
+	/**
+	 * 修改保存${tableComment}
+	 */
+	@RequiresPermissions("${moduleName}:${classname}:edit")
+	@Log(title = "${tableComment}", businessType = BusinessType.UPDATE)
+	@PutMapping("/edit")
+	@ResponseBody
+	public R editSave(@Validated ${classNameWithPre}DTO dto) {
+		dto.setUpdateBy(ShiroUtils.getLoginName());
+		int row = ${classname}Service.update${className}(dto);
+		return res(row);
+	}
+	
+	/**
+	 * 删除${tableComment}
+	 */
+	@RequiresPermissions("${moduleName}:${classname}:remove")
+	@Log(title = "${tableComment}", businessType = BusinessType.DELETE)
+	@DeleteMapping( "/remove")
+	@ResponseBody
+	public R remove(String ids) {
+		int row = ${classname}Service.delete${className}ByIds(Convert.toLongArray(ids));
+		return res(row);
+	}
+}

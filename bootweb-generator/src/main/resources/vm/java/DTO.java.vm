@@ -1,0 +1,14 @@
+package ${package}.dto;
+
+import ${package}.domain.${classNameWithPre};
+
+/**
+ * ${tableComment} DTO对象
+ * 
+ * @author ${author}
+ * @version V1.0
+ */
+public class  ${classNameWithPre}DTO extends ${classNameWithPre}{
+
+	
+}
