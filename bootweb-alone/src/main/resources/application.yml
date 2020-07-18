@@ -1,0 +1,61 @@
+
+
+#License相关配置
+license:
+  server:
+    # 证书subject
+    subject: sub-
+    # 秘钥别称
+    privateAlias: privateKey
+    # 密钥密码（需要妥善保管，不能让使用者知道）
+    keyPass:
+    # 秘钥库密码(不能太简单，否则报密码错误)
+    storePass:
+    # license存放位置
+    licensePath: E:/license/license.lic
+    # 秘钥存放位置
+    privateKeysStorePath: E:/license2/privateKeys.keystore
+    # 生效时间
+    issuedTime: 2020-01-01 00:00:00
+    # 过期时间
+    expireTime: 2020-01-02 00:00:00
+    # 用户类型
+    consumerType: User
+    # 用户总数（暂未使用）
+    consumerAmount: 1
+    # license描述
+    description:
+    # 服务器硬件参数
+    licenseHardwareCheck:
+      ipAddress:
+      macAddress:
+      cpuSerial:
+      mainBoardSerial:
+  client:
+    # 证书subject
+    subject: sub-
+    # 公钥别称
+    publicAlias: publicCert
+    # 公钥库密码
+    storePass:
+    # 证书生成路径
+    licensePath: E:/license/license.lic
+    # 密钥库存储路径
+    storePath: E:/license/publicCerts.keystore
+    # 校验类型（ip,mac,cpu,board）
+    checkType: mac
+
+server:
+  port: 8080
+spring:
+  datasource:
+    name: druid
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    druid:
+      url: jdbc:mysql://localhost:3306/bootweb?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+      username: root
+      password: root
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8

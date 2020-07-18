@@ -1,0 +1,65 @@
+
+服务端认证：
+    方法：LicenseServerController.generateLicense
+    URI：/license/server/generateLicense
+    请求格式：json
+    {
+        "subject":"sub-flowmonitor",
+        "privateAlias":"privateKey",
+        "keyPass":"private_password1234",
+        "storePass":"public_password1234",
+        "licensePath":"E:/license/license.lic",
+        "privateKeysStorePath":"E:/license/privateKeys.keystore",
+        "issuedTime":"2020-01-01 00:00:00",
+        "expireTime":"2020-07-18 17:59:00",
+        "consumerType":"User",
+        "consumerAmount":1,
+        "description":"此证书用于XX系统的license授权",
+        "licenseHardwareCheck":{
+            "ipAddress":[
+                "192.168.33.2",
+                "172.17.129.37",
+                "10.131.6.132"],
+            "macAddress":[
+                "00-50-56-C0-00-08",
+                "00-FF-AA-BB-CC-DE",
+                "00-13-EF-2F-0D-28"
+                ],
+            "cpuSerial":"BFEBFBFF000306A9",
+            "mainBoardSerial":"WB13252230"
+        }
+    }
+    提前准备秘钥文件（客户端用） ==> E:/license/privateKeys.keystore
+    方法执行后，会生成license.lic文件 ==> E:/license/license.lic
+
+
+客户端认证：
+    认证前提：已经得到license.lic文件
+    项目配置：
+        #License相关配置
+        license:
+          # 证书subject
+          subject: sub-flowmonitor
+          # 公钥别称
+          publicAlias: publicCert
+          # 公钥库密码
+          storePass: public_password1234
+          # 证书生成路径
+          licensePath: E:/license/license.lic
+          # 密钥库存储路径
+          publicKeysStorePath: E:/ws_qzh/publicCerts.keystore
+    项目启动时安装证书
+    项目访问时拦截请求校验证书的可用性
+
+
+
+假如我们设置公钥库密码为： public_password1234 ，私钥库密码为： private_password1234 ，则生成命令如下：
+
+#生成命令
+keytool -genkeypair -keysize 1024 -validity 3650 -alias "privateKey" -keystore "privateKeys.keystore" -storepass "public_password1234" -keypass "private_password1234" -dname "CN=localhost, OU=localhost, O=localhost, L=SH, ST=SH, C=CN"
+#导出命令
+keytool -exportcert -alias "privateKey" -keystore "privateKeys.keystore" -storepass "public_password1234" -file "certfile.cer"
+#导入命令
+keytool -import -alias "publicCert" -file "certfile.cer" -keystore "publicCerts.keystore" -storepass "public_password1234"
+上述命令执行完成之后，会在当前路径下生成三个文件，分别是：privateKeys.keystore、publicCerts.keystore、certfile.cer。 其中文件certfile.cer不再需要可以删除，文件privateKeys.keystore用于当前的 ServerDemo 项目给客户生成license文件，而文件publicCerts.keystore则随应用代码部署到客户服务器，用户解密license文件并校验其许可信息 。
+
