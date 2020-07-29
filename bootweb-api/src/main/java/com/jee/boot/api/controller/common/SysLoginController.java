@@ -26,11 +26,18 @@ public class SysLoginController {
 
     /**
      * 登录
+     *    request.header==> Authorization:eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjRiZmIzZTRmLTM0YjktNDk2NS1iZDRiLTNjMDkyOGJlYmRmNCJ9.2QLngblIWogAqEC_JB84V0WHKNBORLdIHzFisq6kUN5X4N2ig3WPPdZkEgbGNG3J0vsT9dMdmJaQ9b4nJHSn1w
+     *    request.body==>
+     *      {
+     * 	        "username":"jee",
+     * 	        "password":"admin"
+     * 	    }
      */
     @PostMapping("/login")
     @ResponseBody
     public R login(@RequestBody LoginBody loginBody){ System.out.println(loginBody);
         // 生成令牌
+        //eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6Ijk3OTRmM2EzLTczZmItNDY2MC1iZjM4LTA4OWI5ZjI4Zjc5YSJ9.pFtVwSfjP998akOBXBP0DT3PZr1lJY6REguNB7nAgNEwl9AWSzVSMVg3N0bSbV8vquWxOSpFQHnFEv8GZXAWtQ
         String token = loginService.login(loginBody.getUsername(), loginBody.getPassword(), loginBody.getCode(),
                 loginBody.getUuid());
         return R.ok().data(TokenConstants.TOKEN, token);

@@ -2,7 +2,8 @@ package com.jee.boot.framework.config;
 
 import com.jee.boot.common.config.BWProp;
 import com.jee.boot.common.utils.spring.SpringUtils;
-import com.jee.boot.framework.interceptor.SameUrlDataInterceptor;
+import com.jee.boot.framework.interceptor.AbstractRepeatSubmitInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -16,6 +17,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 public class WebConfig implements WebMvcConfigurer{
+
+    @Autowired
+    AbstractRepeatSubmitInterceptor repeatSubmitInterceptor;
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -42,7 +46,7 @@ public class WebConfig implements WebMvcConfigurer{
         //国际化
         registry.addInterceptor(SpringUtils.getBean(I18nConfig.class).localeChangeInterceptor());
         //可重复提交
-        registry.addInterceptor(SpringUtils.getBean(SameUrlDataInterceptor.class));
+        registry.addInterceptor(repeatSubmitInterceptor).addPathPatterns("/**");
     }
 
 

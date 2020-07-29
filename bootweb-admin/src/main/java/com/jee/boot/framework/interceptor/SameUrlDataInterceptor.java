@@ -1,7 +1,6 @@
 package com.jee.boot.framework.interceptor;
 
 import com.jee.boot.common.utils.JsonUtils;
-import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;

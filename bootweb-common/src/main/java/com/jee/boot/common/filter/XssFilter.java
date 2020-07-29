@@ -1,4 +1,4 @@
-package com.jee.boot.common.xss;
+package com.jee.boot.common.filter;
 
 import com.jee.boot.common.utils.text.JeeStringUtils;
 

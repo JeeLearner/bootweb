@@ -1,0 +1,58 @@
+14:55:01.081 [restartedMain] INFO  c.j.b.a.l.Application - [logStarting,50] - Starting Application on lyd-PC with PID 8456 (G:\item_idea\Jeelearner-bootweb\bootweb-alone\target\classes started by lyd in G:\item_idea\Jeelearner-bootweb)
+14:55:01.088 [restartedMain] INFO  c.j.b.a.l.Application - [logStartupProfileInfo,675] - No active profile set, falling back to default profiles: default
+14:55:07.661 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Initializing ProtocolHandler ["http-nio-8080"]
+14:55:07.716 [restartedMain] INFO  o.a.c.c.StandardService - [log,173] - Starting service [Tomcat]
+14:55:07.716 [restartedMain] INFO  o.a.c.c.StandardEngine - [log,173] - Starting Servlet Engine: Apache Tomcat/9.0.13
+14:55:07.732 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [F:\javaSoft_common\jdk1.8.0_202\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;D:\MyDevelop\IntelliJ IDEA 2019.2\jbr\\bin;D:\MyDevelop\IntelliJ IDEA 2019.2\jbr\\bin\server;F:\javaSoft_common\hadoop-2.6.1\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;F:\javaSoft_common\mysql-5.7.25-winx64\bin;F:\javaSoft_common\apache-maven-3.3.9\bin;F:\javaSoft_common\jdk1.8.0_202\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;F:\MyDevelop\Git\cmd;F:\MyDevelop\SVN\VisualSVN Server\bin;F:\MyDevelop\SVN\TortoiseSVN\bin;F:\java_vue\nodejs\;F:\javaSoft_common\scala\bin;F:\javaSoft_common\tools\PuTTY\;F:\javaSoft_common\Python\Python37-32\Scripts\;F:\javaSoft_common\Python\Python37-32\;C:\Users\lyd\AppData\Roaming\npm;C:\Users\lyd\AppData\Local\BypassRuntm;D:\MyDevelop\IntelliJ IDEA 2019.2\bin;;.;;.;;.]
+14:55:08.008 [restartedMain] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring embedded WebApplicationContext
+14:55:09.291 [restartedMain] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - [dataSource,56] - Init DruidDataSource
+14:55:09.543 [restartedMain] INFO  c.a.d.p.DruidDataSource - [init,930] - {dataSource-1} inited
+14:55:10.560 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1208] - Using default implementation for ThreadExecutor
+14:55:10.580 [restartedMain] INFO  o.q.c.SchedulerSignalerImpl - [<init>,61] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+14:55:10.580 [restartedMain] INFO  o.q.c.QuartzScheduler - [<init>,229] - Quartz Scheduler v.2.3.0 created.
+14:55:10.581 [restartedMain] INFO  o.q.s.RAMJobStore - [initialize,155] - RAMJobStore initialized.
+14:55:10.582 [restartedMain] INFO  o.q.c.QuartzScheduler - [initialize,294] - Scheduler meta-data: Quartz Scheduler (v2.3.0) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+14:55:10.582 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1362] - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+14:55:10.583 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1366] - Quartz scheduler version: 2.3.0
+14:55:10.583 [restartedMain] INFO  o.q.c.QuartzScheduler - [setJobFactory,2287] - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@31c36353
+14:55:10.817 [restartedMain] INFO  o.q.c.QuartzScheduler - [start,547] - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+14:55:10.828 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Starting ProtocolHandler ["http-nio-8080"]
+14:55:10.871 [restartedMain] INFO  o.a.t.u.n.NioSelectorPool - [log,173] - Using a shared selector for servlet write/read
+14:55:10.981 [restartedMain] INFO  c.j.b.a.l.Application - [logStarted,59] - Started Application in 13.351 seconds (JVM running for 19.646)
+15:36:27.607 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+15:38:15.267 [restartedMain] INFO  c.j.b.a.l.Application - [logStarting,50] - Starting Application on lyd-PC with PID 11972 (G:\item_idea\Jeelearner-bootweb\bootweb-alone\target\classes started by lyd in G:\item_idea\Jeelearner-bootweb)
+15:38:15.273 [restartedMain] INFO  c.j.b.a.l.Application - [logStartupProfileInfo,675] - No active profile set, falling back to default profiles: default
+15:38:19.480 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Initializing ProtocolHandler ["http-nio-8080"]
+15:38:19.584 [restartedMain] INFO  o.a.c.c.StandardService - [log,173] - Starting service [Tomcat]
+15:38:19.584 [restartedMain] INFO  o.a.c.c.StandardEngine - [log,173] - Starting Servlet Engine: Apache Tomcat/9.0.13
+15:38:19.609 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [F:\javaSoft_common\jdk1.8.0_202\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;D:\MyDevelop\IntelliJ IDEA 2019.2\jbr\\bin;D:\MyDevelop\IntelliJ IDEA 2019.2\jbr\\bin\server;F:\javaSoft_common\hadoop-2.6.1\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;F:\javaSoft_common\mysql-5.7.25-winx64\bin;F:\javaSoft_common\apache-maven-3.3.9\bin;F:\javaSoft_common\jdk1.8.0_202\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;F:\MyDevelop\Git\cmd;F:\MyDevelop\SVN\VisualSVN Server\bin;F:\MyDevelop\SVN\TortoiseSVN\bin;F:\java_vue\nodejs\;F:\javaSoft_common\scala\bin;F:\javaSoft_common\tools\PuTTY\;F:\javaSoft_common\Python\Python37-32\Scripts\;F:\javaSoft_common\Python\Python37-32\;C:\Users\lyd\AppData\Roaming\npm;C:\Users\lyd\AppData\Local\BypassRuntm;D:\MyDevelop\IntelliJ IDEA 2019.2\bin;;.;;.;;.]
+15:38:20.114 [restartedMain] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring embedded WebApplicationContext
+15:38:21.297 [restartedMain] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - [dataSource,56] - Init DruidDataSource
+15:38:21.471 [restartedMain] INFO  c.a.d.p.DruidDataSource - [init,930] - {dataSource-1} inited
+15:38:21.854 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1208] - Using default implementation for ThreadExecutor
+15:38:21.867 [restartedMain] INFO  o.q.c.SchedulerSignalerImpl - [<init>,61] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+15:38:21.868 [restartedMain] INFO  o.q.c.QuartzScheduler - [<init>,229] - Quartz Scheduler v.2.3.0 created.
+15:38:21.869 [restartedMain] INFO  o.q.s.RAMJobStore - [initialize,155] - RAMJobStore initialized.
+15:38:21.870 [restartedMain] INFO  o.q.c.QuartzScheduler - [initialize,294] - Scheduler meta-data: Quartz Scheduler (v2.3.0) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+15:38:21.870 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1362] - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+15:38:21.870 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1366] - Quartz scheduler version: 2.3.0
+15:38:21.871 [restartedMain] INFO  o.q.c.QuartzScheduler - [setJobFactory,2287] - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@4ee07d01
+15:38:22.068 [restartedMain] INFO  o.q.c.QuartzScheduler - [start,547] - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+15:38:22.081 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Starting ProtocolHandler ["http-nio-8080"]
+15:38:22.121 [restartedMain] INFO  o.a.t.u.n.NioSelectorPool - [log,173] - Using a shared selector for servlet write/read
+15:38:22.187 [restartedMain] INFO  c.j.b.a.l.Application - [logStarted,59] - Started Application in 7.842 seconds (JVM running for 12.395)
+15:39:03.327 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring DispatcherServlet 'dispatcherServlet'

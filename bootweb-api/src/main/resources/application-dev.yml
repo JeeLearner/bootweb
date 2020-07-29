@@ -19,7 +19,10 @@ bootweb:
   # 上传路径
   upload-path: ${bootweb.profile}/upload/
 
-
+druid:
+  master:
+    ip: localhost
+    database: bootweb_vue
 
 
 # Tomcat

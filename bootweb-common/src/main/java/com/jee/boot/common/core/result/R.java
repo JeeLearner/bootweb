@@ -1,5 +1,7 @@
 package com.jee.boot.common.core.result;
 
+import com.jee.boot.common.constant.HttpStatus;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,6 +51,17 @@ public class R {
         r.setSuccess(RCodeEnum.UNKNOWN_ERROR.getSuccess());
         r.setCode(RCodeEnum.UNKNOWN_ERROR.getCode());
         r.setMsg(RCodeEnum.UNKNOWN_ERROR.getMessage());
+        return r;
+    }
+
+    /**
+     * 错误返回消息
+     */
+    public static R error(String msg) {
+        R r = new R();
+        r.setSuccess(false);
+        r.setCode(HttpStatus.ERROR);
+        r.setMsg(msg);
         return r;
     }
 

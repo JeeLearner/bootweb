@@ -3,7 +3,6 @@ package com.jee.boot.framework.aspectj;
 import com.alibaba.fastjson.JSON;
 import com.jee.boot.common.annotation.Log;
 import com.jee.boot.common.enums.BusinessStatus;
-import com.jee.boot.common.utils.DateUtils;
 import com.jee.boot.common.utils.spring.ServletUtils;
 import com.jee.boot.common.utils.text.JeeStringUtils;
 import com.jee.boot.framework.manager.AsyncManager;
@@ -18,12 +17,16 @@ import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.assertj.core.util.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.HandlerMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -108,7 +111,7 @@ public class LogAspect {
             // 设置请求方式
             operLog.setRequestMethod(ServletUtils.getRequest().getMethod());
             // 处理设置注解上的参数
-            getControllerMethodDescription(controllerLog, operLog);
+            getControllerMethodDescription(joinPoint, controllerLog, operLog);
             // 保存数据库
             AsyncManager.me().execute(AsyncFactory.recordOperLog(operLog));
         } catch (Exception ex){
@@ -126,7 +129,7 @@ public class LogAspect {
      * @param operLog 操作日志
      * @throws Exception
      */
-    private void getControllerMethodDescription(Log controllerLog, SysLogOperDTO operLog) {
+    private void getControllerMethodDescription(JoinPoint joinPoint, Log controllerLog, SysLogOperDTO operLog) throws Exception {
         // 设置action动作
         operLog.setBusinessType(controllerLog.businessType().ordinal());
         // 设置标题
@@ -136,7 +139,7 @@ public class LogAspect {
         // 是否需要保存request，参数和值
         if (controllerLog.isSaveRequestData()){
             // 获取参数的信息，传入到数据库中。
-            setRequestValue(operLog);
+            setRequestValue(joinPoint, operLog);
         }
     }
 
@@ -146,10 +149,20 @@ public class LogAspect {
      * @param operLog 操作日志
      * @throws Exception 异常
      */
-    private void setRequestValue(SysLogOperDTO operLog) {
-        Map<String, String[]> map = ServletUtils.getRequest().getParameterMap();
-        String params = JSON.toJSONString(map);
-        operLog.setOperParam(JeeStringUtils.substring(params, 0, 2000));
+//    private void setRequestValue(SysLogOperDTO operLog) {
+//        Map<String, String[]> map = ServletUtils.getRequest().getParameterMap();
+//        String params = JSON.toJSONString(map);
+//        operLog.setOperParam(JeeStringUtils.substring(params, 0, 2000));
+//    }
+    private void setRequestValue(JoinPoint joinPoint, SysLogOperDTO operLog) throws Exception {
+        String requestMethod = operLog.getRequestMethod();
+        if (HttpMethod.PUT.name().equals(requestMethod) || HttpMethod.POST.name().equals(requestMethod)) {
+            String params = argsArrayToString(joinPoint.getArgs());
+            operLog.setOperParam(JeeStringUtils.substring(params, 0, 2000));
+        } else {
+            Map<?, ?> paramsMap = (Map<?, ?>) ServletUtils.getRequest().getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
+            operLog.setOperParam(JeeStringUtils.substring(paramsMap.toString(), 0, 2000));
+        }
     }
 
     /**
@@ -163,6 +176,32 @@ public class LogAspect {
             return method.getAnnotation(Log.class);
         }
         return null;
+    }
+
+    /**
+     * 参数拼装
+     */
+    private String argsArrayToString(Object[] paramsArray) {
+        String params = "";
+        if (paramsArray != null && paramsArray.length > 0) {
+            for (int i = 0; i < paramsArray.length; i++) {
+                if (!isFilterObject(paramsArray[i])) {
+                    Object jsonObj = JSON.toJSON(paramsArray[i]);
+                    params += jsonObj.toString() + " ";
+                }
+            }
+        }
+        return params.trim();
+    }
+
+    /**
+     * 判断是否需要过滤的对象。
+     *
+     * @param o 对象信息。
+     * @return 如果是需要过滤的对象，则返回true；否则返回false。
+     */
+    public boolean isFilterObject(final Object o) {
+        return o instanceof MultipartFile || o instanceof HttpServletRequest || o instanceof HttpServletResponse;
     }
 }
 

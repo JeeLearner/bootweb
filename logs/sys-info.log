@@ -1,0 +1,152 @@
+2020-07-20 09:18:51.252 [restartedMain] INFO  c.j.b.a.l.c.Application - [logStarting,50] - Starting Application on lyd-PC with PID 4880 (G:\item_idea\Jeelearner-bootweb\bootweb-alone\target\classes started by lyd in G:\item_idea\Jeelearner-bootweb)
+2020-07-20 09:18:51.335 [restartedMain] INFO  c.j.b.a.l.c.Application - [logStartupProfileInfo,675] - No active profile set, falling back to default profiles: default
+2020-07-20 09:18:55.256 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Initializing ProtocolHandler ["http-nio-8081"]
+2020-07-20 09:18:55.273 [restartedMain] INFO  o.a.c.c.StandardService - [log,173] - Starting service [Tomcat]
+2020-07-20 09:18:55.273 [restartedMain] INFO  o.a.c.c.StandardEngine - [log,173] - Starting Servlet Engine: Apache Tomcat/9.0.13
+2020-07-20 09:18:55.284 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [F:\javaSoft_common\jdk1.8.0_202\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;D:\MyDevelop\IntelliJ IDEA 2019.2\jbr\\bin;D:\MyDevelop\IntelliJ IDEA 2019.2\jbr\\bin\server;F:\javaSoft_common\hadoop-2.6.1\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;F:\javaSoft_common\mysql-5.7.25-winx64\bin;F:\javaSoft_common\apache-maven-3.3.9\bin;F:\javaSoft_common\jdk1.8.0_202\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;F:\MyDevelop\Git\cmd;F:\MyDevelop\SVN\VisualSVN Server\bin;F:\MyDevelop\SVN\TortoiseSVN\bin;F:\java_vue\nodejs\;F:\javaSoft_common\scala\bin;F:\javaSoft_common\tools\PuTTY\;F:\javaSoft_common\Python\Python37-32\Scripts\;F:\javaSoft_common\Python\Python37-32\;C:\Users\lyd\AppData\Roaming\npm;C:\Users\lyd\AppData\Local\BypassRuntm;D:\MyDevelop\IntelliJ IDEA 2019.2\bin;;.;;.;;.]
+2020-07-20 09:18:55.586 [restartedMain] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring embedded WebApplicationContext
+2020-07-20 09:18:57.405 [restartedMain] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - [dataSource,56] - Init DruidDataSource
+2020-07-20 09:18:57.783 [restartedMain] INFO  c.a.d.p.DruidDataSource - [init,930] - {dataSource-1} inited
+2020-07-20 09:18:58.726 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1208] - Using default implementation for ThreadExecutor
+2020-07-20 09:18:58.746 [restartedMain] INFO  o.q.c.SchedulerSignalerImpl - [<init>,61] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2020-07-20 09:18:58.747 [restartedMain] INFO  o.q.c.QuartzScheduler - [<init>,229] - Quartz Scheduler v.2.3.0 created.
+2020-07-20 09:18:58.748 [restartedMain] INFO  o.q.s.RAMJobStore - [initialize,155] - RAMJobStore initialized.
+2020-07-20 09:18:58.750 [restartedMain] INFO  o.q.c.QuartzScheduler - [initialize,294] - Scheduler meta-data: Quartz Scheduler (v2.3.0) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2020-07-20 09:18:58.750 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1362] - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2020-07-20 09:18:58.750 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1366] - Quartz scheduler version: 2.3.0
+2020-07-20 09:18:58.750 [restartedMain] INFO  o.q.c.QuartzScheduler - [setJobFactory,2287] - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@780daf3c
+2020-07-20 09:18:59.143 [restartedMain] INFO  o.q.c.QuartzScheduler - [start,547] - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2020-07-20 09:18:59.159 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Starting ProtocolHandler ["http-nio-8081"]
+2020-07-20 09:18:59.191 [restartedMain] INFO  o.a.t.u.n.NioSelectorPool - [log,173] - Using a shared selector for servlet write/read
+2020-07-20 09:18:59.243 [restartedMain] INFO  c.j.b.a.l.c.Application - [logStarted,59] - Started Application in 8.973 seconds (JVM running for 12.857)
+2020-07-20 09:19:19.122 [http-nio-8081-exec-2] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-20 09:19:19.220 [http-nio-8081-exec-2] INFO  c.j.b.a.l.c.s.LicenseClientService - [install,54] - ++++++++ 开始安装证书 ++++++++
+2020-07-20 09:23:32.028 [http-nio-8081-exec-6] INFO  c.j.b.a.l.c.s.LicenseClientService - [install,54] - ++++++++ 开始安装证书 ++++++++
+2020-07-20 09:23:45.693 [Thread-19] INFO  o.q.c.QuartzScheduler - [standby,585] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2020-07-20 09:23:45.694 [Thread-19] INFO  o.q.c.QuartzScheduler - [shutdown,666] - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2020-07-20 09:23:45.695 [Thread-19] INFO  o.q.c.QuartzScheduler - [standby,585] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2020-07-20 09:23:45.696 [Thread-19] INFO  o.q.c.QuartzScheduler - [shutdown,740] - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2020-07-20 09:23:45.703 [Thread-19] INFO  c.a.d.p.DruidDataSource - [close,1825] - {dataSource-1} closed
+2020-07-20 09:23:57.410 [restartedMain] INFO  c.j.b.a.l.c.Application - [logStarting,50] - Starting Application on lyd-PC with PID 8948 (G:\item_idea\Jeelearner-bootweb\bootweb-alone\target\classes started by lyd in G:\item_idea\Jeelearner-bootweb)
+2020-07-20 09:23:57.419 [restartedMain] INFO  c.j.b.a.l.c.Application - [logStartupProfileInfo,675] - No active profile set, falling back to default profiles: default
+2020-07-20 09:24:00.977 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Initializing ProtocolHandler ["http-nio-8081"]
+2020-07-20 09:24:01.001 [restartedMain] INFO  o.a.c.c.StandardService - [log,173] - Starting service [Tomcat]
+2020-07-20 09:24:01.001 [restartedMain] INFO  o.a.c.c.StandardEngine - [log,173] - Starting Servlet Engine: Apache Tomcat/9.0.13
+2020-07-20 09:24:01.013 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [F:\javaSoft_common\jdk1.8.0_202\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;D:\MyDevelop\IntelliJ IDEA 2019.2\jbr\\bin;D:\MyDevelop\IntelliJ IDEA 2019.2\jbr\\bin\server;F:\javaSoft_common\hadoop-2.6.1\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;F:\javaSoft_common\mysql-5.7.25-winx64\bin;F:\javaSoft_common\apache-maven-3.3.9\bin;F:\javaSoft_common\jdk1.8.0_202\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;F:\MyDevelop\Git\cmd;F:\MyDevelop\SVN\VisualSVN Server\bin;F:\MyDevelop\SVN\TortoiseSVN\bin;F:\java_vue\nodejs\;F:\javaSoft_common\scala\bin;F:\javaSoft_common\tools\PuTTY\;F:\javaSoft_common\Python\Python37-32\Scripts\;F:\javaSoft_common\Python\Python37-32\;C:\Users\lyd\AppData\Roaming\npm;C:\Users\lyd\AppData\Local\BypassRuntm;D:\MyDevelop\IntelliJ IDEA 2019.2\bin;;.;;.;;.]
+2020-07-20 09:24:01.368 [restartedMain] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring embedded WebApplicationContext
+2020-07-20 09:24:02.572 [restartedMain] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - [dataSource,56] - Init DruidDataSource
+2020-07-20 09:24:02.780 [restartedMain] INFO  c.a.d.p.DruidDataSource - [init,930] - {dataSource-1} inited
+2020-07-20 09:24:03.432 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1208] - Using default implementation for ThreadExecutor
+2020-07-20 09:24:03.461 [restartedMain] INFO  o.q.c.SchedulerSignalerImpl - [<init>,61] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2020-07-20 09:24:03.462 [restartedMain] INFO  o.q.c.QuartzScheduler - [<init>,229] - Quartz Scheduler v.2.3.0 created.
+2020-07-20 09:24:03.464 [restartedMain] INFO  o.q.s.RAMJobStore - [initialize,155] - RAMJobStore initialized.
+2020-07-20 09:24:03.466 [restartedMain] INFO  o.q.c.QuartzScheduler - [initialize,294] - Scheduler meta-data: Quartz Scheduler (v2.3.0) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2020-07-20 09:24:03.466 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1362] - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2020-07-20 09:24:03.467 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1366] - Quartz scheduler version: 2.3.0
+2020-07-20 09:24:03.467 [restartedMain] INFO  o.q.c.QuartzScheduler - [setJobFactory,2287] - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@1be714d6
+2020-07-20 09:24:03.782 [restartedMain] INFO  o.q.c.QuartzScheduler - [start,547] - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2020-07-20 09:24:03.805 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Starting ProtocolHandler ["http-nio-8081"]
+2020-07-20 09:24:03.852 [restartedMain] INFO  o.a.t.u.n.NioSelectorPool - [log,173] - Using a shared selector for servlet write/read
+2020-07-20 09:24:03.916 [restartedMain] INFO  c.j.b.a.l.c.Application - [logStarted,59] - Started Application in 7.354 seconds (JVM running for 11.179)
+2020-07-20 09:24:28.037 [http-nio-8081-exec-2] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-20 09:24:28.288 [http-nio-8081-exec-2] INFO  c.j.b.a.l.c.s.LicenseClientService - [install,54] - ++++++++ 开始安装证书 ++++++++
+2020-07-20 09:26:30.520 [Thread-10] INFO  o.q.c.QuartzScheduler - [standby,585] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2020-07-20 09:26:30.603 [Thread-10] INFO  o.q.c.QuartzScheduler - [shutdown,666] - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2020-07-20 09:26:30.604 [Thread-10] INFO  o.q.c.QuartzScheduler - [standby,585] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2020-07-20 09:26:30.604 [Thread-10] INFO  o.q.c.QuartzScheduler - [shutdown,740] - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2020-07-20 09:26:30.612 [Thread-10] INFO  c.a.d.p.DruidDataSource - [close,1825] - {dataSource-1} closed
+2020-07-20 09:27:06.479 [restartedMain] INFO  c.j.b.a.l.c.Application - [logStarting,50] - Starting Application on lyd-PC with PID 5696 (G:\item_idea\Jeelearner-bootweb\bootweb-alone\target\classes started by lyd in G:\item_idea\Jeelearner-bootweb)
+2020-07-20 09:27:06.495 [restartedMain] INFO  c.j.b.a.l.c.Application - [logStartupProfileInfo,675] - No active profile set, falling back to default profiles: default
+2020-07-20 09:27:10.311 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Initializing ProtocolHandler ["http-nio-8081"]
+2020-07-20 09:27:10.331 [restartedMain] INFO  o.a.c.c.StandardService - [log,173] - Starting service [Tomcat]
+2020-07-20 09:27:10.332 [restartedMain] INFO  o.a.c.c.StandardEngine - [log,173] - Starting Servlet Engine: Apache Tomcat/9.0.13
+2020-07-20 09:27:10.344 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [F:\javaSoft_common\jdk1.8.0_202\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;D:\MyDevelop\IntelliJ IDEA 2019.2\jbr\\bin;D:\MyDevelop\IntelliJ IDEA 2019.2\jbr\\bin\server;F:\javaSoft_common\hadoop-2.6.1\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;F:\javaSoft_common\mysql-5.7.25-winx64\bin;F:\javaSoft_common\apache-maven-3.3.9\bin;F:\javaSoft_common\jdk1.8.0_202\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;F:\MyDevelop\Git\cmd;F:\MyDevelop\SVN\VisualSVN Server\bin;F:\MyDevelop\SVN\TortoiseSVN\bin;F:\java_vue\nodejs\;F:\javaSoft_common\scala\bin;F:\javaSoft_common\tools\PuTTY\;F:\javaSoft_common\Python\Python37-32\Scripts\;F:\javaSoft_common\Python\Python37-32\;C:\Users\lyd\AppData\Roaming\npm;C:\Users\lyd\AppData\Local\BypassRuntm;D:\MyDevelop\IntelliJ IDEA 2019.2\bin;;.;;.;;.]
+2020-07-20 09:27:10.780 [restartedMain] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring embedded WebApplicationContext
+2020-07-20 09:27:11.720 [restartedMain] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - [dataSource,56] - Init DruidDataSource
+2020-07-20 09:27:11.854 [restartedMain] INFO  c.a.d.p.DruidDataSource - [init,930] - {dataSource-1} inited
+2020-07-20 09:27:12.293 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1208] - Using default implementation for ThreadExecutor
+2020-07-20 09:27:12.311 [restartedMain] INFO  o.q.c.SchedulerSignalerImpl - [<init>,61] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2020-07-20 09:27:12.311 [restartedMain] INFO  o.q.c.QuartzScheduler - [<init>,229] - Quartz Scheduler v.2.3.0 created.
+2020-07-20 09:27:12.312 [restartedMain] INFO  o.q.s.RAMJobStore - [initialize,155] - RAMJobStore initialized.
+2020-07-20 09:27:12.314 [restartedMain] INFO  o.q.c.QuartzScheduler - [initialize,294] - Scheduler meta-data: Quartz Scheduler (v2.3.0) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2020-07-20 09:27:12.314 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1362] - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2020-07-20 09:27:12.314 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1366] - Quartz scheduler version: 2.3.0
+2020-07-20 09:27:12.314 [restartedMain] INFO  o.q.c.QuartzScheduler - [setJobFactory,2287] - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@78c8f8f0
+2020-07-20 09:27:12.520 [restartedMain] INFO  o.q.c.QuartzScheduler - [start,547] - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2020-07-20 09:27:12.535 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Starting ProtocolHandler ["http-nio-8081"]
+2020-07-20 09:27:12.571 [restartedMain] INFO  o.a.t.u.n.NioSelectorPool - [log,173] - Using a shared selector for servlet write/read
+2020-07-20 09:27:12.623 [restartedMain] INFO  c.j.b.a.l.c.Application - [logStarted,59] - Started Application in 6.929 seconds (JVM running for 10.765)
+2020-07-20 09:27:25.189 [http-nio-8081-exec-2] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-20 09:27:25.300 [http-nio-8081-exec-2] INFO  c.j.b.a.l.c.s.LicenseClientService - [install,54] - ++++++++ 开始安装证书 ++++++++
+2020-07-20 09:27:50.131 [http-nio-8081-exec-3] INFO  c.j.b.a.l.c.s.LicenseClientService - [install,54] - ++++++++ 开始安装证书 ++++++++
+2020-07-20 09:28:02.447 [http-nio-8081-exec-4] INFO  c.j.b.a.l.c.s.LicenseClientService - [install,54] - ++++++++ 开始安装证书 ++++++++
+2020-07-20 09:30:08.999 [http-nio-8081-exec-7] INFO  c.j.b.a.l.c.s.LicenseClientService - [install,54] - ++++++++ 开始安装证书 ++++++++
+2020-07-20 09:30:15.615 [http-nio-8081-exec-8] INFO  c.j.b.a.l.c.s.LicenseClientService - [install,54] - ++++++++ 开始安装证书 ++++++++
+2020-07-20 09:30:31.387 [http-nio-8081-exec-9] INFO  c.j.b.a.l.c.s.LicenseClientService - [install,54] - ++++++++ 开始安装证书 ++++++++
+2020-07-20 09:30:40.106 [Thread-16] INFO  o.q.c.QuartzScheduler - [standby,585] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2020-07-20 09:30:40.215 [Thread-16] INFO  o.q.c.QuartzScheduler - [shutdown,666] - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2020-07-20 09:30:40.216 [Thread-16] INFO  o.q.c.QuartzScheduler - [standby,585] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2020-07-20 09:30:40.244 [Thread-16] INFO  o.q.c.QuartzScheduler - [shutdown,740] - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2020-07-20 09:30:40.252 [Thread-16] INFO  c.a.d.p.DruidDataSource - [close,1825] - {dataSource-1} closed
+2020-07-20 09:32:10.825 [restartedMain] INFO  c.j.b.a.l.c.Application - [logStarting,50] - Starting Application on lyd-PC with PID 8704 (G:\item_idea\Jeelearner-bootweb\bootweb-alone\target\classes started by lyd in G:\item_idea\Jeelearner-bootweb)
+2020-07-20 09:32:10.833 [restartedMain] INFO  c.j.b.a.l.c.Application - [logStartupProfileInfo,675] - No active profile set, falling back to default profiles: default
+2020-07-20 09:32:15.563 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Initializing ProtocolHandler ["http-nio-8081"]
+2020-07-20 09:32:15.611 [restartedMain] INFO  o.a.c.c.StandardService - [log,173] - Starting service [Tomcat]
+2020-07-20 09:32:15.612 [restartedMain] INFO  o.a.c.c.StandardEngine - [log,173] - Starting Servlet Engine: Apache Tomcat/9.0.13
+2020-07-20 09:32:15.626 [restartedMain] INFO  o.a.c.c.AprLifecycleListener - [log,173] - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [F:\javaSoft_common\jdk1.8.0_202\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;D:\MyDevelop\IntelliJ IDEA 2019.2\jbr\\bin;D:\MyDevelop\IntelliJ IDEA 2019.2\jbr\\bin\server;F:\javaSoft_common\hadoop-2.6.1\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;F:\javaSoft_common\mysql-5.7.25-winx64\bin;F:\javaSoft_common\apache-maven-3.3.9\bin;F:\javaSoft_common\jdk1.8.0_202\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;F:\MyDevelop\Git\cmd;F:\MyDevelop\SVN\VisualSVN Server\bin;F:\MyDevelop\SVN\TortoiseSVN\bin;F:\java_vue\nodejs\;F:\javaSoft_common\scala\bin;F:\javaSoft_common\tools\PuTTY\;F:\javaSoft_common\Python\Python37-32\Scripts\;F:\javaSoft_common\Python\Python37-32\;C:\Users\lyd\AppData\Roaming\npm;C:\Users\lyd\AppData\Local\BypassRuntm;D:\MyDevelop\IntelliJ IDEA 2019.2\bin;;.;;.;;.]
+2020-07-20 09:32:15.993 [restartedMain] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring embedded WebApplicationContext
+2020-07-20 09:32:16.960 [restartedMain] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - [dataSource,56] - Init DruidDataSource
+2020-07-20 09:32:17.132 [restartedMain] INFO  c.a.d.p.DruidDataSource - [init,930] - {dataSource-1} inited
+2020-07-20 09:32:17.660 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1208] - Using default implementation for ThreadExecutor
+2020-07-20 09:32:17.682 [restartedMain] INFO  o.q.c.SchedulerSignalerImpl - [<init>,61] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2020-07-20 09:32:17.682 [restartedMain] INFO  o.q.c.QuartzScheduler - [<init>,229] - Quartz Scheduler v.2.3.0 created.
+2020-07-20 09:32:17.684 [restartedMain] INFO  o.q.s.RAMJobStore - [initialize,155] - RAMJobStore initialized.
+2020-07-20 09:32:17.685 [restartedMain] INFO  o.q.c.QuartzScheduler - [initialize,294] - Scheduler meta-data: Quartz Scheduler (v2.3.0) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2020-07-20 09:32:17.686 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1362] - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2020-07-20 09:32:17.686 [restartedMain] INFO  o.q.i.StdSchedulerFactory - [instantiate,1366] - Quartz scheduler version: 2.3.0
+2020-07-20 09:32:17.686 [restartedMain] INFO  o.q.c.QuartzScheduler - [setJobFactory,2287] - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@4a0d1874
+2020-07-20 09:32:17.947 [restartedMain] INFO  o.q.c.QuartzScheduler - [start,547] - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2020-07-20 09:32:17.967 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Starting ProtocolHandler ["http-nio-8081"]
+2020-07-20 09:32:18.010 [restartedMain] INFO  o.a.t.u.n.NioSelectorPool - [log,173] - Using a shared selector for servlet write/read
+2020-07-20 09:32:18.074 [restartedMain] INFO  c.j.b.a.l.c.Application - [logStarted,59] - Started Application in 8.497 seconds (JVM running for 13.333)
+2020-07-20 09:33:13.618 [http-nio-8081-exec-3] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-20 09:33:20.099 [http-nio-8081-exec-5] INFO  c.j.b.a.l.c.s.LicenseClientService - [install,54] - ++++++++ 开始安装证书 ++++++++
+2020-07-20 09:33:40.498 [http-nio-8081-exec-2] INFO  c.j.b.a.l.c.s.LicenseClientService - [install,54] - ++++++++ 开始安装证书 ++++++++
+2020-07-20 09:35:02.824 [http-nio-8081-exec-10] INFO  c.j.b.a.l.c.s.LicenseClientService - [install,54] - ++++++++ 开始安装证书 ++++++++
+2020-07-20 09:35:32.530 [http-nio-8081-exec-9] INFO  c.j.b.a.l.c.s.LicenseClientService - [install,54] - ++++++++ 开始安装证书 ++++++++
+2020-07-20 09:43:41.474 [http-nio-8081-exec-4] INFO  c.j.b.a.l.c.s.LicenseClientService - [install,54] - ++++++++ 开始安装证书 ++++++++
+2020-07-20 09:43:41.528 [http-nio-8081-exec-4] INFO  c.j.b.a.l.c.s.LicenseClientService - [install,65] - 证书安装成功，证书有效期：2020-01-01 00:00:00 - 2020-07-28 17:59:00
+2020-07-20 09:43:41.529 [http-nio-8081-exec-4] INFO  c.j.b.a.l.c.s.LicenseClientService - [install,71] - ++++++++ 证书安装结束 ++++++++
+2020-07-20 09:44:26.875 [Thread-13] INFO  o.q.c.QuartzScheduler - [standby,585] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2020-07-20 09:44:26.877 [Thread-13] INFO  o.q.c.QuartzScheduler - [shutdown,666] - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2020-07-20 09:44:26.878 [Thread-13] INFO  o.q.c.QuartzScheduler - [standby,585] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2020-07-20 09:44:26.879 [Thread-13] INFO  o.q.c.QuartzScheduler - [shutdown,740] - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2020-07-20 09:44:26.885 [Thread-13] INFO  c.a.d.p.DruidDataSource - [close,1825] - {dataSource-1} closed

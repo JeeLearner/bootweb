@@ -15,5 +15,7 @@ public class RedisConstants {
      * 验证码 redis key
      */
     public static final String VERIFY_CODE_KEY = "login_codes:";
+
+
 }
 

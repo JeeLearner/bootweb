@@ -196,7 +196,7 @@ public class TokenService {
     public static void main(String[] args) {
         String token = IdUtils.fastUUID();
         String secret = "dsfdsfd";
-        System.out.println(token);
+        System.out.println("token==>" + token);
 
         Map<String, Object> claimss = new HashMap<>();
         claimss.put(TokenConstants.LOGIN_USER_KEY, token);

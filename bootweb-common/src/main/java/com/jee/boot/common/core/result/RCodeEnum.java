@@ -15,6 +15,7 @@ public enum RCodeEnum {
     COMMON_NOFOUND_HANDLER(false, 40003, "请求路径错误"),
     COMMON_CHAR_ILLEGAL(false, 40004, "输入字符非法"),
     VERIFY_CODE_ERROR(false, 40005, "验证码错误"),
+    USER_NOT_MATCH(false, 40006, "用户不存在/密码错误"),
 
     /** 调用第三方服务错误 */
     SQL_DATA_ACCESS_ERROR(false, 50001, "SQL数据验证失败"),

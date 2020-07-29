@@ -1,4 +1,4 @@
-package com.jee.boot.common.utils;
+package com.jee.boot.common.utils.http;
 
 import java.io.BufferedReader;
 import java.io.IOException;

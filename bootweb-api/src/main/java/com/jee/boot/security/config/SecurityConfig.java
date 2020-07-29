@@ -12,6 +12,7 @@ import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -27,11 +28,12 @@ import java.io.PrintWriter;
 
 /**
  * Spring Security配置
+ *      @EnableGlobalMethodSecurity 开启注解，controller中@PreAuthorize注解才会生效！
  *
  * @author jeeLearner
  * @version V1.0
  */
-@Configuration
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
@@ -139,6 +141,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler);
         // 添加JWT filter
         http.addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+        //控制单个用户只能创建一个session，也就只能在服务器登录一次
+        //这里无法踢出，因为session管理权不在spring security，而在于redis
+        //http.sessionManagement().maximumSessions(1);
     }
 }
 
